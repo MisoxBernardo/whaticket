@@ -15,7 +15,7 @@ import {
   Link
 } from '@material-ui/core';
 
-import { LockOutlined, Visibility, VisibilityOff } from '@material-ui/icons';
+import { Visibility, VisibilityOff } from '@material-ui/icons';
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -43,13 +43,16 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: "column",
     alignItems: "center",
   },
-  
-
   avatar: {
     margin: theme.spacing(1),
-    backgroundColor: theme.palette.secondary.main,
+    width: theme.spacing(7),
+    height: theme.spacing(7),
+    '& img': {
+      objectFit: 'contain', // Ensure the image is contained within the avatar
+      width: '100%',
+      height: '100%',
+    },
   },
-
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(1),
@@ -61,6 +64,7 @@ const useStyles = makeStyles((theme) => ({
 
 const Login = () => {
   const classes = useStyles();
+  const avatarUrl = '/logo/fenixlogo.png'; // Caminho da sua imagem na pasta public
 
   const [user, setUser] = useState({ email: "", password: "" });
   const [showPassword, setShowPassword] = useState(false);
@@ -71,7 +75,7 @@ const Login = () => {
     setUser({ ...user, [e.target.name]: e.target.value });
   };
 
-  const handlSubmit = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     handleLogin(user);
   };
@@ -80,13 +84,11 @@ const Login = () => {
     <Container component="main" maxWidth="xs">
       <CssBaseline />
       <div className={classes.paper}>
-        <Avatar className={classes.avatar}>
-          <LockOutlined />
-        </Avatar>
+        <Avatar alt="Avatar" src={avatarUrl} className={classes.avatar} onError={(e) => e.target.src = 'fallback_image_url'} />
         <Typography component="h1" variant="h5">
           {i18n.t("login.title")}
         </Typography>
-        <form className={classes.form} noValidate onSubmit={handlSubmit}>
+        <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
