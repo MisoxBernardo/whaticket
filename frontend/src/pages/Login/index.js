@@ -88,6 +88,9 @@ const Login = () => {
         <Typography component="h1" variant="h5">
           {i18n.t("login.title")}
         </Typography>
+        <Typography variant="body2" color="textSecondary" align="center" style={{ position: 'absolute', bottom: 0, right: 0, margin: '10px', opacity: 0.5 }}>
+          Desenvolvido por <Link color="inherit" href="https://genustecnologia.com.br" target="_blank" rel="noopener noreferrer">Genus Tecnologia</Link>
+        </Typography>
         <form className={classes.form} noValidate onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
@@ -154,5 +157,8 @@ const Login = () => {
     </Container>
   );
 };
+
+
+
 
 export default Login;
